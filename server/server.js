@@ -4,6 +4,9 @@ const mongoose = require("mongoose");
 const validator = require("validator");
 const cors = require("cors");
 
+const User = require('./models/user');
+const Post = require('./models/post');
+
 mongoose.connect('mongodb://127.0.0.1:27017/blog-app-login', { useNewUrlParser: true, useUnifiedTopology: true });
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
@@ -33,7 +36,7 @@ app.post('/user/signup', (req, res) => {
 		email: req.body.email,
 		password: req.body.password
 	}).save((err, response) => {
-		if (err) res.status(400).send(err);
+		if (err) return res.status(400).send(err);
 		res.status(200).send(response);
 	})
 });
@@ -42,15 +45,16 @@ app.post('/user/login', (req, res) => {
 	console.log("Received sign in request\n");
 	User.findOne({'email': req.body.email}, (err, user) => {
 		if (!user) {
-			res.json({message: 'Login failed, user not found\n'});
-			return;
+			return res.status(401).send({
+				message: 'email is not registered'
+			})
 		}
 		
 		// Compare password
-		user.comparePassword(req.body.password, (err, isMatch) => {
-			if (err) res.status(400).send(err);
-			if (!isMatch) return res.status(400).json({
-				message: 'Password Incorrect'
+		user.comparePassword(req.body.password, (error, isMatch) => {
+			if (error) res.status(401).send(error);
+			if (!isMatch) return res.status(401).send({
+				message: 'password is incorrect'
 			});
 			res.status(200).send({
 				'firstname': user.firstName,
@@ -93,5 +97,5 @@ app.post('/post/delete', (req, res) => {
 //app.post('/post/update', (req, res) => {});
 
 app.listen(port, () => {
-  console.log(`Server listening on ${port}`);
+  console.log(`Server listening on Port ${port}`);
 });

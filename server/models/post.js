@@ -1,6 +1,6 @@
 const mongoose = require("mongoose")
 
-var postSchema = mongoose.modelSchema({
+var postSchema = mongoose.Schema({
     title: {
         type: String,
         required: true

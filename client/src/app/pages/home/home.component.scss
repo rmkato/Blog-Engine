@@ -1,0 +1,35 @@
+.navbar {
+    background-color: lightgray;
+    min-height: 50px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+#h1-title {
+    display: block;
+    margin-left: 25px;
+}
+
+#account-section {
+    display: flex;
+    flex-grow: 1;
+    justify-content: flex-end;
+    margin-right: 25px;
+}
+
+button {
+    margin-left: 10px;
+}
+
+.contentContainer {
+    background-color: gray;
+    text-align: center;
+}
+
+.post {
+    background-color: white;
+    border-radius: 5px; 
+    border-color: 2px solid black; 
+    margin: auto;
+}
