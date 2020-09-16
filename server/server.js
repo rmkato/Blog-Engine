@@ -29,20 +29,31 @@ app.get("/", (req, res) => {
 });
 
 app.post('/user/signup', (req, res) => {
-	console.log("Received sign up request\n");
+	console.log("Received sign up request");
 	var user = new User({
 		firstName: req.body.firstname,
 		lastName: req.body.lastname,
 		email: req.body.email,
 		password: req.body.password
 	}).save((err, response) => {
-		if (err) return res.status(400).send(err);
+		if (err) {
+			if (err.code == 11000) {
+				return res.status(400).send({
+					message: 'this email address has already been registered, please login instead.'
+				})
+			}
+			else {
+				return res.status(400).send({
+					message: 'account registration error'
+				});
+			}
+		} 
 		res.status(200).send(response);
 	})
 });
 
 app.post('/user/login', (req, res) => {
-	console.log("Received sign in request\n");
+	console.log("Received sign in request");
 	User.findOne({'email': req.body.email}, (err, user) => {
 		if (!user) {
 			return res.status(401).send({
@@ -67,7 +78,6 @@ app.post('/user/login', (req, res) => {
 //app.post('user/delete')
 
 app.post('/post/retrieve', (req, res) => {
-	console.log("Received get posts request\n");
 	Post.find({}, function(err, posts) {
 		if (err) res.status(400).send(err)
 		res.status(200).send(posts);

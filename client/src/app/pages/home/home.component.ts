@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { strictEqual } from 'assert';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import * as $ from 'jquery';
+import { AccountCreationDialogComponent } from 'src/app/dialogs/account-creation-dialog/account-creation-dialog.component';
+import { LoginDialogComponent } from 'src/app/dialogs/login-dialog/login-dialog.component';
 
 @Component({
   selector: 'app-home',
@@ -9,9 +11,6 @@ import * as $ from 'jquery';
 })
 export class HomeComponent implements OnInit {
   loggedIn: boolean;
-  isCreatingPost: boolean; 
-  isLoggingIn: boolean;
-  isCreatingAccount: boolean;
 
   firstname: string;
   lastname: string;
@@ -22,18 +21,16 @@ export class HomeComponent implements OnInit {
   postTitle: string;
   content: string;
 
-  constructor() { }
+  constructor(private dialog: MatDialog) { }
 
   ngOnInit() {
     this.loggedIn = false;
-    this.isCreatingPost = false;
-    this.isCreatingAccount = false;
-    this.isLoggingIn = false;
 
     this.firstname = '';
     this.lastname = '';
     this.email = '';
     this.password = '';
+
     this.postTitle = '';
     this.content = '';
 
@@ -46,46 +43,9 @@ export class HomeComponent implements OnInit {
       .done((res) => {
         that.posts = res.reverse();
       })
-      .fail((err) => {
-        console.log("Error retrieving posts: ${err}")
+      .fail((res) => {
+        console.log("Error retrieving posts: "+ res.responseJSON.message);
       })
-  }
-
-  createAccount() {
-    $.post('http://localhost:4000/user/signup', 
-    {
-      'firstname': this.firstname,
-      'lastname': this.lastname,
-      'email': this.email,
-      'password': this.password
-    })
-    .done(() => {
-      alert("Account created");
-      this.loggedIn = true;
-      this.isCreatingAccount = false;
-    })
-    .fail((res) => {
-      alert("Account creation failed: " + res.responseJSON.message);
-    })
-  }
-
-  logIn() {
-    $.post('http://localhost:4000/user/login', 
-    {
-      'email': this.email,
-      'password': this.password
-    })
-    .done((res) => {
-      alert("Logged In")
-      this.loggedIn = true;
-      this.isLoggingIn = false;
-      this.firstname = res.firstname;
-      this.lastname = res.lastname;
-    })
-    .fail((res) => {
-      console.log(res)
-      alert("Login Failed: " + res.responseJSON.message);
-    })
   }
 
   logOut() {
@@ -97,17 +57,36 @@ export class HomeComponent implements OnInit {
     alert("Logged out")
   }
 
-  toggleAccountCreation() {
-    this.isCreatingAccount = true;
+  openAccountCreationDialog() {
+    const dialogRef = this.dialog.open(AccountCreationDialogComponent, {
+      autoFocus: true,
+      disableClose: true
+    });
+    dialogRef.afterClosed().subscribe(res => {
+      if (res.accountCreationSuccess == true) {
+        console.log(res)
+        this.firstname = res.firstname;
+        this.lastname = res.lastname;
+        this.email = res.email;
+        this.loggedIn = true;
+      }
+    })
   }
 
-  toggleLogin() {
-    this.isLoggingIn = true;
-  }
-  
-  cancelCreationOrLogin() {
-    this.isCreatingAccount = false;
-    this.isLoggingIn = false;
+  openLoginDialog() {
+    const dialogRef = this.dialog.open(LoginDialogComponent, {
+      autoFocus: true,
+      disableClose: true
+    });
+    dialogRef.afterClosed().subscribe(res => {
+      if (res.loginSuccess == true) {
+        console.log(res)
+        this.firstname = res.firstname;
+        this.lastname = res.lastname;
+        this.email = res.email;
+        this.loggedIn = true;
+      }
+    })
   }
 
 }

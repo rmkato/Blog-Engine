@@ -1,23 +1,10 @@
 <div class="navbar">
     <h1 id="h1-title">Ryan's Messageboard</h1>
     <div id="account-section">
-        <div id="account-display" *ngIf="loggedIn">
-            <h3>Logged in as: {{firstname}} {{lastname}}</h3>
-            <button id="logout-button" (click)="logOut()">Log Out</button>
-        </div>
-        <button id="create-account-button" *ngIf="!isLoggingIn&&!loggedIn&&!isCreatingAccount" (click)="toggleAccountCreation()">Create an Account</button>
-        <button id="login-button" *ngIf="!isLoggingIn&&!loggedIn&&!isCreatingAccount" (click)="toggleLogin()">Log In</button>
-        <div id="account-info-input" *ngIf="isLoggingIn||isCreatingAccount">
-            <div *ngIf="isCreatingAccount">
-                <input [(ngModel)]="firstname" placeholder="first name"><br>
-                <input [(ngModel)]="lastname" placeholder="last name"><br>
-            </div>
-            <input [(ngModel)]="email" placeholder="email"><br>
-            <input [(ngModel)]="password" placeholder="password">
-            <button *ngIf="isCreatingAccount" (click)="createAccount()">Create Account</button>
-            <button *ngIf="isLoggingIn" (click)="logIn()">Log In</button>
-            <button (click)="cancelCreationOrLogin()">Cancel</button>
-        </div>
+        <h3 id="user" *ngIf="loggedIn">User: {{firstname}} {{lastname}}</h3>
+        <button id="logout-button" mat-raised-button *ngIf="loggedIn" (click)="logOut()">Log Out</button>
+        <button id="create-account-button" mat-raised-button *ngIf="!loggedIn" (click)="openAccountCreationDialog()">Create an Account</button>
+        <button id="login-button" mat-raised-button *ngIf="!loggedIn" (click)="openLoginDialog()">Log In</button>
     </div>
 </div>
 <div class="content-container">
