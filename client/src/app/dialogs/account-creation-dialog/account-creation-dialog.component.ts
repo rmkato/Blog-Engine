@@ -43,8 +43,6 @@ export class AccountCreationDialogComponent implements OnInit {
     .fail((res) => {
       alert("Account creation failed: " + res.responseJSON.message);
     })
-
-    
   }
 
   cancel() {

@@ -79,32 +79,50 @@ app.post('/user/login', (req, res) => {
 
 app.post('/post/retrieve', (req, res) => {
 	Post.find({}, function(err, posts) {
-		if (err) res.status(400).send(err)
+		if (err) return res.status(400).send(err)
 		res.status(200).send(posts);
 	})
 });
 
 app.post('/post/create', (req, res) => {
+	console.log("Received post creation request");
 	var post = new Post({
 		title: req.body.title,
 		content: req.body.content,
 		date: req.body.date,
 		user: req.body.user
 	}).save((err, response) => {
-		if (err) res.status(400).send(err);
+		if (err) return res.status(400).send(err);
 		res.status(200).send(response);
 	})
 });
 
 app.post('/post/delete', (req, res) => {
+	console.log("Received post deletion request");
 	Post.deleteOne({_id: new mongoose.Types.ObjectId(req.body.id)}, (err, response) => {
-		if (err) res.status(400).send(err);
+		if (err) return res.status(400).send(err);
 		console.log("post " + req.body.id + " deleted\n");
 		res.status(200).send(response);
 	})
 });
 
-//app.post('/post/update', (req, res) => {});
+app.post('/post/update', (req, res) => {
+	console.log("Received post update request");
+	Post.findOneAndUpdate(
+		{ 
+			_id: new mongoose.Types.ObjectId(req.body.id) 
+		}, 
+		{ 
+			title: req.body.title,
+			content: req.body.content	
+		}, 
+		(err, response) => {
+			if (err) return res.status(400).send(err);
+			console.log("post " + req.body.id + "updated\n");
+			res.status(200).send(response);
+		}
+	);
+});
 
 app.listen(port, () => {
   console.log(`Server listening on Port ${port}`);

@@ -1,0 +1,17 @@
+<h2 mat-dialog-title>Edit Post</h2>
+
+<mat-dialog-content>
+    <mat-form-field>
+        <mat-label>Post Title</mat-label>
+        <input matInput type="text" [(ngModel)]="postTitle">
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+        <input matInput type="text" [(ngModel)]="postBody">
+    </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button mat-raised-button (click)="updatePost()">Post</button>
+    <button mat-raised-button (click)="cancel()">Cancel</button>
+</mat-dialog-actions>

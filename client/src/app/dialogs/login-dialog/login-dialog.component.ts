@@ -39,7 +39,6 @@ export class LoginDialogComponent implements OnInit {
       'password': this.password
     })
     .done((res) => {
-      alert("Logged In")
       this.loggedIn = true;
       this.isLoggingIn = false;
       this.firstname = res.firstname;
@@ -50,15 +49,15 @@ export class LoginDialogComponent implements OnInit {
         'email': this.email,
         'loginSuccess': true
       })
+      alert("Logged In")
     })
     .fail((res) => {
-      console.log(res)
       alert("Login Failed: " + res.responseJSON.message);
     })
   }
 
   cancel() {
-    this.dialogRef.close({'loginSuccess': false})
+    this.dialogRef.close({'loginSuccess': false});
   }
 
 }

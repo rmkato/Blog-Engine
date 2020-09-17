@@ -11,13 +11,19 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
 import { AccountCreationDialogComponent } from './dialogs/account-creation-dialog/account-creation-dialog.component';
 import { LoginDialogComponent } from './dialogs/login-dialog/login-dialog.component';
+import { PostCreationDialogComponent } from './dialogs/post-creation-dialog/post-creation-dialog.component';
+import { FilterDialogComponent } from './dialogs/filter-dialog/filter-dialog.component';
+import { PostEditingDialogComponent } from './dialogs/post-editing-dialog/post-editing-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     AccountCreationDialogComponent,
-    LoginDialogComponent
+    LoginDialogComponent,
+    PostCreationDialogComponent,
+    FilterDialogComponent,
+    PostEditingDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -30,6 +36,11 @@ import { LoginDialogComponent } from './dialogs/login-dialog/login-dialog.compon
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [AccountCreationDialogComponent, LoginDialogComponent]
+  entryComponents: [
+    AccountCreationDialogComponent, 
+    LoginDialogComponent, 
+    PostCreationDialogComponent, 
+    FilterDialogComponent, 
+    PostEditingDialogComponent]
 })
 export class AppModule { }
