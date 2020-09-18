@@ -26,7 +26,7 @@ export class PostCreationDialogComponent implements OnInit {
     $.post('http://localhost:4000/post/create', {
       title: this.postTitle,
       content: this.postBody,
-      date: new Date().toISOString().slice(0,10),
+      date: new Date().toLocaleString(),
       user: this.data.email
     })
     .done(() => {

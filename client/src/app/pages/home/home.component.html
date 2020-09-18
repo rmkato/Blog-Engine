@@ -9,8 +9,8 @@
         <button id="settings-button" mat-raised-button *ngIf="loggedIn" (click)="openSettingsDialog()"><img src="assets/settings-icon.svg" alt="Settings"></button>
     </div>
 </div>
-<div class="post-controlbar" *ngIf="loggedIn">
-    <button id="create-post" mat-raised-button (click)="openPostCreationDialog()"><img src="assets/add-icon.svg" alt="">&nbsp; New Post</button>
+<div class="post-controlbar">
+    <button id="create-post" mat-raised-button *ngIf="loggedIn" (click)="openPostCreationDialog()"><img src="assets/add-icon.svg" alt="">&nbsp; New Post</button>
     <button id="filter-posts" mat-raised-button (click)="openFilterDialog()"><img src="assets/filter-list-icon.svg" alt="">&nbsp; Filter Posts</button>
 </div>
 <div class="posts-container">

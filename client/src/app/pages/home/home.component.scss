@@ -1,6 +1,6 @@
 .navbar {
-    background-color: rgb(200, 226, 230);
-    min-height: 50px;
+    background-color: rgb(6, 79, 50);
+    color: white;
     width: 100%;
     display: flex;
     align-items: center;
@@ -10,11 +10,14 @@
     margin-left: 25px;
     width: 30px;
     height: 30px;
+    filter: invert(100%);
 }
 
 #h1-title {
+    font-family: 'Indie Flower', cursive; 
     display: block;
     margin-left: 20px;
+    margin-bottom: 5px;
 }
 
 #account-section {
@@ -25,6 +28,7 @@
 }
 
 #user {
+    font-family: 'Indie Flower', cursive; 
     margin-top: auto;
     margin-bottom: auto;
 }
@@ -34,30 +38,46 @@ button {
 }
 
 .post-controlbar {
-    margin-top: 15px;
-    margin-left: 15px;
+    background-color: rgb(141, 196, 141);
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    padding-top: 8px;
+    padding-left: 15px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid black;
+    z-index: 3;
+    line-height: 1.2em;
 }
 
 .posts-container {
-    background-color: white;
+    min-height: calc(100vh - 136px);
+    background: url(../../../assets/tropical-background.png) no-repeat center center fixed; 
+    background-repeat: repeat-y;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
     text-align: center;
+    padding-top: 15px;
+    padding-bottom: 15px;
 }
 
 .post {
-    background-color: grey;
+    background-color: rgb(128, 128, 128, 1);
     border-radius: 5px; 
     border: 3px solid black;
     margin-left: 10%;
     margin-right: 10%;
-    margin-top: 20px;
+    margin-bottom: 20px;
     display: flex;
     overflow: hidden;
     position: relative;
 }
 
 .col1 {
-    background-color: rgb(255, 193, 179);
-    flex-grow: 1;
+    background-color: rgb(141, 196, 141, 1);
+    flex: 1;
     float: left;
     text-align: center;
     border-right: 1px solid black;
@@ -81,8 +101,9 @@ button {
 }
 
 .col2 {
-    background-color: rgb(255, 231, 222);
-    flex-grow: 3;
+    background-color: rgb(255, 255, 255, 1);
+    opacity: 100%;
+    flex: 3;
     float: left;
     text-align: left;
     padding-left: 3%;
