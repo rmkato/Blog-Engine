@@ -6,9 +6,7 @@
         <input matInput type="text" [(ngModel)]="postTitle" placeholder="Title">
     </mat-form-field>
     <br>
-    <mat-form-field>
-        <input matInput type="text" [(ngModel)]="postBody" placeholder="Body">
-    </mat-form-field>
+    <textarea required [(ngModel)]="postBody"></textarea>
 </mat-dialog-content>
 
 <mat-dialog-actions>
