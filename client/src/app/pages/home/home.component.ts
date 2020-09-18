@@ -87,6 +87,8 @@ export class HomeComponent implements OnInit {
 
   openPostCreationDialog() {
     const dialogRef = this.dialog.open(PostCreationDialogComponent, {
+      height: '60%',
+      width: '75%',
       autoFocus: true,
       disableClose: true,
       data: {
@@ -115,6 +117,8 @@ export class HomeComponent implements OnInit {
 
   openPostEditingDialog(post: any) {
     const dialogRef = this.dialog.open(PostEditingDialogComponent, {
+      height: '60%',
+      width: '75%',
       autoFocus: true,
       disableClose: true,
       data: {

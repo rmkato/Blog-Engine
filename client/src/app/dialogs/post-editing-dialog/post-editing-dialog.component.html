@@ -6,12 +6,10 @@
         <input matInput type="text" [(ngModel)]="postTitle">
     </mat-form-field>
     <br>
-    <mat-form-field>
-        <input matInput type="text" [(ngModel)]="postBody">
-    </mat-form-field>
+    <textarea required rows='12' [(ngModel)]="postBody"></textarea>
 </mat-dialog-content>
 
 <mat-dialog-actions>
-    <button mat-raised-button (click)="updatePost()">Post</button>
+    <button mat-raised-button (click)="updatePost()">Update</button>
     <button mat-raised-button (click)="cancel()">Cancel</button>
 </mat-dialog-actions>
