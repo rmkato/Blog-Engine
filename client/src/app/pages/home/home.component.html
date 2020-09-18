@@ -19,7 +19,7 @@
             <h3 class="post-title">{{post.title}}</h3>
             <div class="post-date">{{post.date}}</div>
             <div class="post-user">{{post.user}}</div>
-            <div class="post-buttons" *ngIf="post.user == email">
+            <div class="post-buttons" *ngIf="post.email == email">
                 <button id="post-edit" mat-raised-button (click)="openPostEditingDialog(post)"><img src="assets/edit-icon.svg" alt=""></button>
                 <button id="post-delete" mat-raised-button (click)="openPostDeletionDialog(post._id)"><img src="assets/delete-icon.svg" alt=""></button>
             </div>

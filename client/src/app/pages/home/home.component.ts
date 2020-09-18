@@ -90,7 +90,8 @@ export class HomeComponent implements OnInit {
       autoFocus: true,
       disableClose: true,
       data: {
-        'email': this.email
+        'email': this.email,
+        'user': this.firstname + ' ' + this.lastname
       }
     });
     dialogRef.afterClosed().subscribe(() => {

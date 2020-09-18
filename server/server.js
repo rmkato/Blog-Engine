@@ -90,7 +90,8 @@ app.post('/post/create', (req, res) => {
 		title: req.body.title,
 		content: req.body.content,
 		date: req.body.date,
-		user: req.body.user
+		user: req.body.user,
+		email: req.body.email
 	}).save((err, response) => {
 		if (err) return res.status(400).send(err);
 		res.status(200).send(response);

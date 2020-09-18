@@ -23,11 +23,13 @@ export class PostCreationDialogComponent implements OnInit {
   }
   
   createPost() {
+    console.log(this.postTitle, this.postBody, this.data.user, this.data.email)
     $.post('http://localhost:4000/post/create', {
       title: this.postTitle,
       content: this.postBody,
       date: new Date().toLocaleString(),
-      user: this.data.email
+      user: this.data.user,
+      email: this.data.email
     })
     .done(() => {
       alert("Post created");
