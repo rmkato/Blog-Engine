@@ -1,5 +1,5 @@
 # Blog-Engine
-Simple Angular blog application that uses an Express server and MongoDB to establish an OAuth flow allowing users to create an account, log in, and utilize CRUD operations to manage posts. 
+Simple Angular blog application that uses an Express server and MongoDB to establish an authentication flow allowing users to create an account, log in, and utilize CRUD operations to manage posts. 
 
 # Requirements
 * <a target="_blank" rel="noopener noreferrer" href="https://nodejs.org/en/download/">Node.js</a> is required to install the project's dependencies. 
