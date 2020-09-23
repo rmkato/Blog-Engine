@@ -2,7 +2,7 @@
     <img id="app-logo" src="assets/board-icon.svg" alt="">
     <h1 id="h1-title">Ryan's Messageboard</h1>
     <div id="account-section">
-        <h3 id="user" *ngIf="loggedIn">{{firstname}} {{lastname}}</h3>
+        <h3 id="user" *ngIf="loggedIn">{{firstName}} {{lastName}}</h3>
         <button id="logout-button" mat-raised-button *ngIf="loggedIn" (click)="logOut()">Log Out</button>
         <button id="create-account-button" mat-raised-button *ngIf="!loggedIn" (click)="openAccountCreationDialog()">Create an Account</button>
         <button id="login-button" mat-raised-button *ngIf="!loggedIn" (click)="openLoginDialog()">Log In</button>

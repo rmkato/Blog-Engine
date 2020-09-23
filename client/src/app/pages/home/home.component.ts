@@ -15,8 +15,8 @@ import { PostEditingDialogComponent } from 'src/app/dialogs/post-editing-dialog/
 export class HomeComponent implements OnInit {
   loggedIn: boolean;
 
-  firstname: string;
-  lastname: string;
+  firstName: string;
+  lastName: string;
   email: string;
   password: string;
 
@@ -26,12 +26,35 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.loggedIn = false;
-    this.firstname = '';
-    this.lastname = '';
+    this.firstName = '';
+    this.lastName = '';
     this.email = '';
     this.password = '';
 
+    this.checkLoginCookie();
     this.getPosts();
+  }
+
+  checkLoginCookie() {
+    if (document.cookie) {
+      $.post('http://localhost:4000/user/verifyCookie', {'cookie': document.cookie})
+        .done((res) => {
+          this.firstName = res.firstName;
+          this.lastName = res.lastName;
+          this.email = res.email;
+          this.loggedIn = true;
+          this.deleteLoginCookie();
+          document.cookie = res.cookie;
+        })
+        .fail((res) => {
+          console.log("login cookie failed to verify");
+          this.deleteLoginCookie();
+        })
+      }
+  }
+
+  deleteLoginCookie() {
+    document.cookie = 'login=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
   }
 
   getPosts() {
@@ -46,11 +69,12 @@ export class HomeComponent implements OnInit {
   }
 
   logOut() {
-    this.firstname = '';
-    this.lastname = '';
+    this.firstName = '';
+    this.lastName = '';
     this.email = '';
     this.password = '';
     this.loggedIn = false;
+    this.deleteLoginCookie();
     alert("Logged out")
   }
 
@@ -61,9 +85,8 @@ export class HomeComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(res => {
       if (res.accountCreationSuccess == true) {
-        console.log(res)
-        this.firstname = res.firstname;
-        this.lastname = res.lastname;
+        this.firstName = res.firstName;
+        this.lastName = res.lastName;
         this.email = res.email;
         this.loggedIn = true;
       }
@@ -77,8 +100,8 @@ export class HomeComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((res) => {
       if (res.loginSuccess == true) {
-        this.firstname = res.firstname;
-        this.lastname = res.lastname;
+        this.firstName = res.firstName;
+        this.lastName = res.lastName;
         this.email = res.email;
         this.loggedIn = true;
       }
@@ -93,7 +116,7 @@ export class HomeComponent implements OnInit {
       disableClose: true,
       data: {
         'email': this.email,
-        'user': this.firstname + ' ' + this.lastname
+        'user': this.firstName + ' ' + this.lastName
       }
     });
     dialogRef.afterClosed().subscribe(() => {

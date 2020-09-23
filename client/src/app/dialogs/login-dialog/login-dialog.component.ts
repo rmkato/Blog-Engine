@@ -13,8 +13,8 @@ export class LoginDialogComponent implements OnInit {
   isLoggingIn: boolean;
   isCreatingAccount: boolean;
 
-  firstname: string;
-  lastname: string;
+  firstName: string;
+  lastName: string;
   email: string;
   password: string; 
 
@@ -23,8 +23,8 @@ export class LoginDialogComponent implements OnInit {
     this.isCreatingPost = false;
     this.isCreatingAccount = false;
     this.isLoggingIn = false;
-    this.firstname = '';
-    this.lastname = '';
+    this.firstName = '';
+    this.lastName = '';
     this.email = '';
     this.password = '';
   }
@@ -41,15 +41,18 @@ export class LoginDialogComponent implements OnInit {
     .done((res) => {
       this.loggedIn = true;
       this.isLoggingIn = false;
-      this.firstname = res.firstname;
-      this.lastname = res.lastname;
+      this.firstName = res.firstName;
+      this.lastName = res.lastName;
       this.dialogRef.close({
-        'firstname': this.firstname,
-        'lastname': this.lastname,
+        'firstName': this.firstName,
+        'lastName': this.lastName,
         'email': this.email,
         'loginSuccess': true
-      })
+      });
+      console.log(res.cookie);
+      document.cookie = res.cookie;
       alert("Logged In")
+      console.log(document.cookie);
     })
     .fail((res) => {
       alert("Login Failed: " + res.responseJSON.message);
