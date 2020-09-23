@@ -28,8 +28,7 @@ export class PostCreationDialogComponent implements OnInit {
       title: this.postTitle,
       content: this.postBody,
       date: new Date().toLocaleString(),
-      user: this.data.user,
-      email: this.data.email
+      user: this.data.username,
     })
     .done(() => {
       alert("Post created");
