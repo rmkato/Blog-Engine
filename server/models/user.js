@@ -1,3 +1,4 @@
+const bcrypt = require('bcrypt');
 const mongoose = require("mongoose")
 
 var userSchema = mongoose.Schema({
@@ -19,10 +20,13 @@ var userSchema = mongoose.Schema({
         type: String,
         required: true,
         minlength: 6
+    },
+    cookie: {
+        type: String,
+        required: false
     }
 })
 
-const bcrypt = require('bcrypt');
 let SALT = 10;
 
 // .pre() hashes password with bcrypt before inserting it into the database

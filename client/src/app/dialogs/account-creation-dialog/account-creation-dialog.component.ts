@@ -8,14 +8,14 @@ import * as $ from 'jquery';
   styleUrls: ['./account-creation-dialog.component.scss']
 })
 export class AccountCreationDialogComponent implements OnInit {
-  firstname: string;
-  lastname: string;
+  firstName: string;
+  lastName: string;
   email: string;
   password: string;
 
   constructor(public dialogRef: MatDialogRef<AccountCreationDialogComponent>) {
-    this.firstname = '';
-    this.lastname = '';
+    this.firstName = '';
+    this.lastName = '';
     this.email = '';
     this.password = '';
   }
@@ -26,19 +26,21 @@ export class AccountCreationDialogComponent implements OnInit {
   createAccount() {
     $.post('http://localhost:4000/user/signup', 
     {
-      'firstname': this.firstname,
-      'lastname': this.lastname,
+      'firstName': this.firstName,
+      'lastName': this.lastName,
       'email': this.email,
       'password': this.password
     })
-    .done(() => {
-      alert("Account created");
+    .done((res) => {
       this.dialogRef.close({
-        'firstname': this.firstname,
-        'lastname': this.lastname,
+        'firstName': this.firstName,
+        'lastName': this.lastName,
         'email': this.email,
         'accountCreationSuccess': true
-      })
+      });
+      document.cookie = res.cookie;
+      alert("Account created");
+      console.log(document.cookie);
     })
     .fail((res) => {
       alert("Account creation failed: " + res.responseJSON.message);
