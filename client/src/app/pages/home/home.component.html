@@ -13,20 +13,38 @@
     <button id="create-post" mat-raised-button *ngIf="loggedIn" (click)="openPostCreationDialog()"><img src="assets/add-icon.svg" alt="">&nbsp; New Post</button>
     <button id="filter-posts" mat-raised-button (click)="openFilterDialog()"><img src="assets/filter-list-icon.svg" alt="">&nbsp; Filter Posts</button>
 </div>
-<div class="posts-container">
-    <div class="post" *ngFor="let post of posts">
-        <div class="col1">
-            <h3 class="post-title">{{post.title}}</h3>
-            <div class="post-date">{{post.date}}</div>
-            <div class="post-user">{{post.user}}</div>
-            <div class="post-buttons" *ngIf="post.email == email">
-                <button id="post-edit" mat-raised-button (click)="openPostEditingDialog(post)"><img src="assets/edit-icon.svg" alt=""></button>
-                <button id="post-delete" mat-raised-button (click)="openPostDeletionDialog(post._id)"><img src="assets/delete-icon.svg" alt=""></button>
+<div class="post-background-container">
+    <div class="post-container">
+        <div class="post" *ngFor="let post of posts">
+            <div class="post-user-date">
+                <div class="post-user">{{post.user}}</div>
+                <div class="post-date">{{post.date}}</div>
             </div>
-        </div>
-        <hr id="post-hr">
-        <div class="col2">
+            <div class="post-buttons" *ngIf="post.email == email">
+                <button id="post-edit" mat-button (click)="openPostEditingDialog(post)"><img src="assets/edit-icon.svg" alt=""></button>
+                <button id="post-delete" mat-button (click)="openPostDeletionDialog(post._id)"><img src="assets/delete-icon.svg" alt=""></button>
+            </div>
+            <h3 class="post-title">{{post.title}}</h3>
             <div class="post-content">{{post.content}}</div>
-        </div>       
+            <hr class="post-hr">
+        </div>
     </div>
 </div>
+
+<!--
+<div class="post" *ngFor="let post of posts">
+    <div class="col1">
+        <h3 class="post-title">{{post.title}}</h3>
+        <div class="post-date">{{post.date}}</div>
+        <div class="post-user">{{post.user}}</div>
+        <div class="post-buttons" *ngIf="post.email == email">
+            <button id="post-edit" mat-raised-button (click)="openPostEditingDialog(post)"><img src="assets/edit-icon.svg" alt=""></button>
+            <button id="post-delete" mat-raised-button (click)="openPostDeletionDialog(post._id)"><img src="assets/delete-icon.svg" alt=""></button>
+        </div>
+    </div>
+    <hr id="post-hr">
+    <div class="col2">
+        <div class="post-content">{{post.content}}</div>
+    </div>       
+</div>
+-->

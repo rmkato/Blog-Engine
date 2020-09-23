@@ -7,6 +7,10 @@
     align-items: center;
 }
 
+.mat-raised-button {
+    background-color: rgb(226, 226, 226);
+}
+
 #app-logo {
     margin-left: 25px;
     width: 30px;
@@ -51,36 +55,92 @@ button {
     line-height: 1.2em;
 }
 
-.posts-container {
-    min-height: calc(100vh - 136px);
+.post-background-container {
+    min-height: calc(100vh - 106.2px);
     background: url(../../../assets/tropical-background.png) no-repeat center center fixed; 
     background-repeat: repeat-y;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    text-align: center;
-    padding-top: 15px;
-    padding-bottom: 15px;
+}
+
+.post-container {
+    box-sizing: border-box;
+    background-color: rgb(255, 255, 255, 0.8);
+    margin-left: 3%;
+    margin-right: 3%;
+    padding-top: 30px;
+    padding-bottom: 20px;
+    min-height: calc(100vh - 106.2px);
 }
 
 .post {
-    background-color: rgb(128, 128, 128, 1);
-    border-radius: 5px; 
-    border: 3px solid black;
     margin-left: 10%;
+    padding-left: 10px;
     margin-right: 10%;
-    margin-bottom: 20px;
-    display: flex;
+    padding-top: 20px;
+    display: block;
     overflow: hidden;
     position: relative;
+}
+
+.post-user-date {
+    width: 100%;
+}
+
+.post-user {
+    color: rgb(0, 95, 57);
+}
+
+.post-date {
+    color: rgb(0,0,0, 0.5);
+    font-size: 0.8rem;
+    display: block;
+}
+
+.post-title {
+    margin-bottom: 10px;
+    margin-left: 20px;
+}
+
+.post-content {
+    text-align: left;
+    margin-left: 20px;
+    width: 100%;
+    white-space: pre-line;
+}
+
+.post-hr {
+    margin-block-start: none;
+    margin-block-end: none;
+    margin: 0;
+    margin-top: 30px;
+}
+
+.post-buttons {
+    padding-top: 10px;
+    padding-right: 10px;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.post .mat-button:hover {
+    background-color: rgb(141, 196, 141, 0.6)
+}
+
+#post-edit {
+    margin-bottom: 10px;
 }
 
 .col1 {
     background-color: rgb(141, 196, 141, 1);
     flex: 1;
+    flex-grow: 0;
     float: left;
-    text-align: center;
+    text-align: left;
+    width: 94%;
     border-right: 1px solid black;
     padding-left: 3%;
     padding-right: 3%;
@@ -88,75 +148,22 @@ button {
     padding-bottom: 10px;
 }
 
-.post-title {
-    padding-bottom: 5px;
-}
-
-.post-buttons {
-    padding-top: 10px;
-    padding-right: 10px;
-}
-
-#post-edit {
-    margin-bottom: 10px;
-}
-
 .col2 {
     background-color: rgb(255, 255, 255, 1);
     opacity: 100%;
     flex: 3;
+    flex-grow: 0;
     float: left;
     text-align: left;
+    width: 94%;
     padding-left: 3%;
     padding-right: 3%;
     padding-top: 10px;
     padding-bottom: 10px;
 }
 
-.post-title {
-    margin-top: 0;
-    margin-bottom: 5px;
-    display: inline-block;
-}
-
-#post-hr {
-    display: none;
-    margin-block-start: none;
-    margin-block-end: none;
-    margin: 0;
-}
-
-.post-content {
-    text-align: left;
-    width: 100%;
-    white-space: pre-line;
-}
-
 @media screen and (max-width: 690px) {
     #h1-title {
         display: none;
-    }
-}
-
-@media screen and (max-width: 860px) {
-    .post {
-        display: block;
-    }
-    .post-buttons {
-        position: absolute;
-        top: 0;
-        right: 0;
-    }
-    .col1 {
-        flex-grow: 0;
-        width: 94%;
-        text-align: left;
-    }
-    .col2 {
-        flex-grow: 0;
-        width: 94%;
-    }
-    #post-hr {
-        display: block;
     }
 }
