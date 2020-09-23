@@ -1,1 +1,27 @@
-<p>filter-dialog works!</p>
+<h2 mat-dialog-title>Filter Posts</h2>
+
+<mat-dialog-content>
+    <mat-form-field>
+        <mat-label>Most Recent</mat-label>
+        <!-- Checkbox -->
+        <input matInput [(ngModel)]="firstName">
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+        <mat-label>By User</mat-label>
+        <!-- Input field to specify user -->
+        <input matInput [(ngModel)]="user">
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+        <mat-label>By Tag</mat-label>
+        <!-- Dropdown menu to select a tag -->
+        <input matInput [(ngModel)]="email">
+    </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button mat-raised-button (click)="filterPosts()">Filter</button>
+    <button mat-raised-button (click)="clearFilter()">Clear Filter</button>
+    <button mat-raised-button (click)="cancel()">Cancel</button>
+</mat-dialog-actions>
