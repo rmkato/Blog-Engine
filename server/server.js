@@ -170,7 +170,8 @@ app.post('/post/update', (req, res) => {
 		}, 
 		{ 
 			title: req.body.title,
-			content: req.body.content	
+			content: req.body.content,
+			date: req.body.date
 		}, 
 		(err, response) => {
 			if (err) return res.status(400).send(err);
