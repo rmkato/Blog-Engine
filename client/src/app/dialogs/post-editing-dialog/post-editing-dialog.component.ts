@@ -28,6 +28,7 @@ export class PostEditingDialogComponent implements OnInit {
       id: this.data.id,
       title: this.postTitle,
       content: this.postBody,
+      date: new Date().toLocaleString()
     })
     .done(() => {
       this.dialogRef.close();
