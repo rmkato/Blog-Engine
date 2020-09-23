@@ -10,12 +10,14 @@ import * as $ from 'jquery';
 export class AccountCreationDialogComponent implements OnInit {
   firstName: string;
   lastName: string;
+  username: string;
   email: string;
   password: string;
 
   constructor(public dialogRef: MatDialogRef<AccountCreationDialogComponent>) {
     this.firstName = '';
     this.lastName = '';
+    this.username = '';
     this.email = '';
     this.password = '';
   }
@@ -28,14 +30,13 @@ export class AccountCreationDialogComponent implements OnInit {
     {
       'firstName': this.firstName,
       'lastName': this.lastName,
+      'username': this.username,
       'email': this.email,
       'password': this.password
     })
     .done((res) => {
       this.dialogRef.close({
-        'firstName': this.firstName,
-        'lastName': this.lastName,
-        'email': this.email,
+        'username': this.username,
         'accountCreationSuccess': true
       });
       document.cookie = res.cookie;

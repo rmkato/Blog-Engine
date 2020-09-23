@@ -18,6 +18,7 @@ export class HomeComponent implements OnInit {
 
   firstName: string;
   lastName: string;
+  username: string;
   email: string;
   password: string;
 
@@ -29,6 +30,7 @@ export class HomeComponent implements OnInit {
     this.loggedIn = false;
     this.firstName = '';
     this.lastName = '';
+    this.username = '';
     this.email = '';
     this.password = '';
 
@@ -40,9 +42,7 @@ export class HomeComponent implements OnInit {
     if (document.cookie) {
       $.post('http://localhost:4000/user/verifyCookie', {'cookie': document.cookie})
         .done((res) => {
-          this.firstName = res.firstName;
-          this.lastName = res.lastName;
-          this.email = res.email;
+          this.username = res.username;
           this.loggedIn = true;
           this.deleteLoginCookie();
           document.cookie = res.cookie;
@@ -70,13 +70,17 @@ export class HomeComponent implements OnInit {
   }
 
   logOut() {
+    this.clearInputFields();
+    this.deleteLoginCookie();
+    this.loggedIn = false;
+    alert("Logged out")
+  }
+
+  clearInputFields() {
     this.firstName = '';
     this.lastName = '';
     this.email = '';
     this.password = '';
-    this.loggedIn = false;
-    this.deleteLoginCookie();
-    alert("Logged out")
   }
 
   openAccountCreationDialog() {
@@ -86,10 +90,9 @@ export class HomeComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(res => {
       if (res.accountCreationSuccess == true) {
-        this.firstName = res.firstName;
-        this.lastName = res.lastName;
-        this.email = res.email;
+        this.username = res.username;
         this.loggedIn = true;
+        this.clearInputFields();
       }
     })
   }
@@ -101,10 +104,9 @@ export class HomeComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((res) => {
       if (res.loginSuccess == true) {
-        this.firstName = res.firstName;
-        this.lastName = res.lastName;
-        this.email = res.email;
+        this.username = res.username;
         this.loggedIn = true;
+        this.clearInputFields();
       }
     });
   }
@@ -116,8 +118,7 @@ export class HomeComponent implements OnInit {
       autoFocus: true,
       disableClose: true,
       data: {
-        'email': this.email,
-        'user': this.firstName + ' ' + this.lastName
+        'username': this.username
       }
     });
     dialogRef.afterClosed().subscribe(() => {

@@ -8,7 +8,7 @@ const cryptoJS = require("crypto-js");
 const User = require('./models/user');
 const Post = require('./models/post');
 
-mongoose.connect('mongodb://127.0.0.1:27017/blog-app-login', { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false });
+mongoose.connect('mongodb://127.0.0.1:27017/blog-engine-login', { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false });
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 db.on('connected', () => {
@@ -35,6 +35,7 @@ app.post('/user/signup', (req, res) => {
 	var user = new User({
 		firstName: req.body.firstName,
 		lastName: req.body.lastName,
+		username: req.body.username,
 		email: req.body.email,
 		password: req.body.password,
 		cookie: cookie.split(';')[0]
@@ -43,7 +44,7 @@ app.post('/user/signup', (req, res) => {
 			console.log("Signup unsuccessful: ", err);
 			if (err.code == 11000) {
 				return res.status(400).send({
-					message: 'this email address has already been registered, please login instead.'
+					message: 'this email address or username has already been registered, please login instead.'
 				})
 			}
 			else {
@@ -52,11 +53,9 @@ app.post('/user/signup', (req, res) => {
 				});
 			}
 		} 
-		console.log(`Sign up successful for ${req.body.firstName} ${req.body.lastName}\n`);
+		console.log(`Sign up successful for ${req.body.username}\n`);
 		res.status(200).send({
-			'firstName': req.body.firstName,
-			'lastName': req.body.lastName,
-			'email': req.body.email,
+			'username': req.body.username,
 			'accountCreationSuccess': true,
 			'cookie': cookie
 		});
@@ -66,7 +65,7 @@ app.post('/user/signup', (req, res) => {
 app.post('/user/login', (req, res) => {
 	console.log("Received sign in request");
 	// Verify that account exists for email
-	User.findOne({'email': req.body.email}, (err, user) => {
+	User.findOne({'username': req.body.username}, (err, user) => {
 		if (!user) {
 			return res.status(401).send({
 				message: 'email is not registered'
@@ -81,9 +80,8 @@ app.post('/user/login', (req, res) => {
 		});
 
 		var cookie = createLoginCookie(user.firstName, user.lastName);
-		console.log(cookie);
 		User.findOneAndUpdate(
-			{ 'email': req.body.email }, 
+			{ 'username': req.body.username }, 
 			{ 'cookie': cookie.split(';')[0] },
 			(error, result) => {
 				if (error) {
@@ -94,10 +92,8 @@ app.post('/user/login', (req, res) => {
 			}
 		)
 		// Encrypt the cookie and send it to the client
-
 		res.status(200).send({
-			'firstName': user.firstName,
-			'lastName': user.lastName,
+			'username': user.username,
 			'cookie': cookie
 		});
 	});	
@@ -116,14 +112,12 @@ app.post('/user/verifyCookie', (req, res) => {
 		} else {
 			// Match found; log user in and generate a new cookie
 			var newCookie = createLoginCookie(user.firstName, user.lastName);
-			User.findOneAndUpdate({ 'email': user.email }, { 'cookie': newCookie.split(';')[0] }, (err2)=>{
+			User.findOneAndUpdate({ 'username': user.username }, { 'cookie': newCookie.split(';')[0] }, (err2)=>{
 				if (err2) throw err2;
 			});
 			console.log("cookie verified\n");
 			res.status(200).send({
-				'firstName': user.firstName,
-				'lastName': user.lastName,
-				'email': user.email,
+				'username': user.username,
 				'cookie': newCookie
 			})
 		}
@@ -145,8 +139,7 @@ app.post('/post/create', (req, res) => {
 		title: req.body.title,
 		content: req.body.content,
 		date: req.body.date,
-		user: req.body.user,
-		email: req.body.email
+		user: req.body.user
 	}).save((err, response) => {
 		if (err) return res.status(400).send(err);
 		res.status(200).send(response);
@@ -191,7 +184,6 @@ function createLoginCookie(firstName, lastName) {
 	var expiration = new Date();
 	expiration.setTime(expiration.getTime() + (60*60*1000))
 	var expiration_UTC = expiration.toUTCString();
-	//var cookie = `${user}:${token}; expires=${expiration}`;
 	var cookie = `login=${user}:${token}; expires=${expiration_UTC}`;
 	return cookie; 
 }
