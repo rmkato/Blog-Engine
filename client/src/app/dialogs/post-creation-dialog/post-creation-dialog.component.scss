@@ -1,3 +1,29 @@
 mat-dialog-content textarea {
-    width: 90%;
+    width: 100%;
+}
+
+.mat-form-field .mat-raised-button {
+    position: absolute;
+    left: 200;
+    top: 0;
+    margin-left: 20px;
+    min-width: 0;
+}
+
+.tagContainer {
+    width: 100%;
+    min-height: 50px;
+}
+
+.postTag {
+    margin-left: 5px;
+    position: relative;
+}
+
+.mat-stroked-button {
+    background-color: rgb(141, 196, 141, 0.6);
+}
+
+.mat-raised-button {
+    background-color: rgb(226, 226, 226);
 }

@@ -13,9 +13,7 @@ export class LoginDialogComponent implements OnInit {
   isLoggingIn: boolean;
   isCreatingAccount: boolean;
 
-  firstName: string;
-  lastName: string;
-  email: string;
+  username: string;
   password: string; 
 
   constructor(public dialogRef: MatDialogRef<LoginDialogComponent>) { 
@@ -23,9 +21,7 @@ export class LoginDialogComponent implements OnInit {
     this.isCreatingPost = false;
     this.isCreatingAccount = false;
     this.isLoggingIn = false;
-    this.firstName = '';
-    this.lastName = '';
-    this.email = '';
+    this.username = '';
     this.password = '';
   }
 
@@ -35,18 +31,14 @@ export class LoginDialogComponent implements OnInit {
   logIn() {
     $.post('http://localhost:4000/user/login', 
     {
-      'email': this.email,
+      'username': this.username,
       'password': this.password
     })
     .done((res) => {
       this.loggedIn = true;
       this.isLoggingIn = false;
-      this.firstName = res.firstName;
-      this.lastName = res.lastName;
       this.dialogRef.close({
-        'firstName': this.firstName,
-        'lastName': this.lastName,
-        'email': this.email,
+        'username': this.username,
         'loginSuccess': true
       });
       console.log(res.cookie);

@@ -1,11 +1,20 @@
-<h2 mat-dialog-title>Create a Post</h2>
-
 <mat-dialog-content>
+    <h2 mat-dialog-title>Create a Post</h2>
     <mat-form-field>
         <mat-label>Post Title</mat-label>
-        <input matInput type="text" [(ngModel)]="postTitle" placeholder="Title">
+        <input matInput type="text" [(ngModel)]="postTitle" placeholder="title">
     </mat-form-field>
     <br>
+    <mat-form-field>
+        <mat-label>Tag</mat-label>
+        <input matInput type="text" [(ngModel)]="tag">
+        <button mat-raised-button (click)="addTag()">+</button>
+    </mat-form-field>
+    <div class="tagContainer">
+        <span class="postTag" *ngFor="let tag of postTags">
+            <button mat-stroked-button (click)="removeTag(tag)">{{tag}}</button>
+        </span>
+    </div>
     <textarea required rows='12' [(ngModel)]="postBody"></textarea>
 </mat-dialog-content>
 
