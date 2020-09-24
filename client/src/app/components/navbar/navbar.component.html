@@ -1,6 +1,6 @@
 <div class="navbar">
-    <img id="app-logo" src="assets/board-icon.svg" alt="">
-    <h1 id="h1-title">Ryan's Messageboard</h1>
+    <img id="app-logo" [routerLink]="['home']"src="assets/board-icon.svg" alt="">
+    <h1 id="h1-title" [routerLink]="['home']">Ryan's Messageboard</h1>
     <div id="account-section">
         <h3 id="user" *ngIf="user.loggedIn">{{user.username}}</h3>
         <button id="logout-button" mat-raised-button *ngIf="user.loggedIn" (click)="logOut()">Log Out</button>
