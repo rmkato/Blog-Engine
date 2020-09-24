@@ -38,7 +38,6 @@ export class PostCreationDialogComponent implements OnInit {
   }
   
   createPost() {
-    console.log(this.postTitle, this.postBody, this.data.username, this.postTags);
     $.post('http://localhost:4000/post/create', {
       title: this.postTitle,
       content: this.postBody,

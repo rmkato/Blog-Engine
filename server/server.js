@@ -126,10 +126,24 @@ app.post('/user/verifyCookie', (req, res) => {
 
 //app.post('user/delete')
 
-app.post('/post/retrieve', (req, res) => {
+app.post('/post/retrieveAll', (req, res) => {
+	console.log("Received post retrieval request\n");
 	Post.find({}, function(err, posts) {
 		if (err) return res.status(400).send(err)
 		res.status(200).send(posts);
+	});
+});
+
+
+app.post('/post/retrieveOne', (req, res) => {
+	console.log("Received post retrieval request");
+	Post.findOne({
+		_id: new mongoose.Types.ObjectId(req.body.id)
+	}, 
+	(err, response) => {
+		if (err) return res.status(400).send(err);
+		console.log("post " + response._id + "retrieved\n");
+		res.status(200).send(response);
 	});
 });
 

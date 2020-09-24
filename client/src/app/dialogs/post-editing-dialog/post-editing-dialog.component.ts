@@ -39,7 +39,6 @@ export class PostEditingDialogComponent implements OnInit {
   }
 
   updatePost() {
-    console.log("updating post,", this.postTitle, this.postTags, this.postBody);
     $.post('http://localhost:4000/post/update', {
       id: this.data.id,
       title: this.postTitle,
