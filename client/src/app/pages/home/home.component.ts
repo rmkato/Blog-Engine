@@ -149,6 +149,7 @@ export class HomeComponent implements OnInit {
       data: {
         title: post.title,
         content: post.content,
+        tags: post.tags,
         id: post._id
       }
     })
