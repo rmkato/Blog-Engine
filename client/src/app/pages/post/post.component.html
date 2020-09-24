@@ -1,1 +1,18 @@
-<p>post works!</p>
+<div class="post-background-container">
+    <div class="post-titlebar">
+        <h3 class="post-title">{{postTitle}}</h3>
+        <div class="post-user-date-tags">
+            <div class="post-user">{{postUser}}</div><br>
+            <div class="post-date">{{postDate}}</div>
+        </div>
+        <span class="post-tags">
+            <span class="post-tag" *ngFor="let tag of postTags">
+                <button mat-stroked-button>{{tag}}</button>
+            </span>
+        </span>
+    </div>
+    <div class="post-content-container">
+        <div class="post-content">{{postContent}}</div>
+        <hr>
+    </div>
+</div>

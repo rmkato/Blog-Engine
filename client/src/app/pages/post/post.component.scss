@@ -1,0 +1,78 @@
+.post-background-container {
+    box-sizing: border-box;
+    min-height: calc(100vh - 179.4px);
+    background: url(../../../assets/tropical-background.png) no-repeat center center fixed; 
+    background-repeat: repeat-y;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.post-titlebar {
+    background-color: rgb(141, 196, 141);
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    padding-top: 8px;
+    padding-left: 15px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid black;
+    z-index: 3;
+    line-height: 1.2em;
+}
+
+.post-title {
+    margin-top: 25px;
+    margin-left: 10%;
+    margin-bottom: 25px;
+    font-size: 2.4rem;
+}
+
+.post-user-date-tags {
+    margin-left: 15%;
+    display: inline-block;
+}
+
+.post-user {
+    color: rgb(0, 95, 57);
+    display: inline-block;
+}
+
+.post-date {
+    color: rgb(0,0,0, 0.5);
+    font-size: 0.8rem;
+    display: inline-block;
+}
+
+.post-tags {
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 10px;
+    margin-left: 50px;
+}
+
+.post-tag button {
+    border: 1px solid gray;
+    background-color: rgb(255,255,255, 0.5);
+    border-radius: 10rem;
+    line-height: 28px;
+    padding: 0 5px;
+    margin-left: 5px;
+}
+
+.post-content-container {
+    box-sizing: border-box;
+    background-color: rgba(243, 255, 235, 0.85);
+    padding-top: 35px;
+    padding-bottom: 20px;
+    padding-right: 15%;
+    padding-left: 15%;
+    min-height: calc(100vh - 179.4px);
+}
+
+.post-content {
+    margin-bottom: 35px;
+    font-size: 1.2rem;
+    white-space: pre-line;
+}

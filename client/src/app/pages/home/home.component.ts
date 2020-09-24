@@ -44,7 +44,7 @@ export class HomeComponent implements OnInit {
 
   getPosts() {
     this.posts = [];
-    $.post('http://localhost:4000/post/retrieve', {})
+    $.post('http://localhost:4000/post/retrieveAll', {})
       .done((res) => {
         this.posts = res.reverse();
       })
