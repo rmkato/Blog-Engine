@@ -28,7 +28,6 @@ export class HomeComponent implements OnInit {
     if (document.cookie) {
       $.post('http://localhost:4000/user/verifyCookie', {'cookie': document.cookie})
         .done((res) => {
-          //this.username = res.username;
           this.user.username = res.username;
           this.user.loggedIn = true;
           this.deleteLoginCookie();
