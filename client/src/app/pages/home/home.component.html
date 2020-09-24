@@ -1,16 +1,5 @@
-<div class="navbar">
-    <img id="app-logo" src="assets/board-icon.svg" alt="">
-    <h1 id="h1-title">Ryan's Messageboard</h1>
-    <div id="account-section">
-        <h3 id="user" *ngIf="loggedIn">{{username}}</h3>
-        <button id="logout-button" mat-raised-button *ngIf="loggedIn" (click)="logOut()">Log Out</button>
-        <button id="create-account-button" mat-raised-button *ngIf="!loggedIn" (click)="openAccountCreationDialog()">Create an Account</button>
-        <button id="login-button" mat-raised-button *ngIf="!loggedIn" (click)="openLoginDialog()">Log In</button>
-        <button id="settings-button" mat-raised-button *ngIf="loggedIn" (click)="openSettingsDialog()"><img src="assets/settings-icon.svg" alt="Settings"></button>
-    </div>
-</div>
 <div class="post-controlbar">
-    <button id="create-post" mat-raised-button *ngIf="loggedIn" (click)="openPostCreationDialog()"><img src="assets/add-icon.svg" alt="">&nbsp; New Post</button>
+    <button id="create-post" mat-raised-button *ngIf="user.loggedIn" (click)="openPostCreationDialog()"><img src="assets/add-icon.svg" alt="">&nbsp; New Post</button>
     <button id="filter-posts" mat-raised-button (click)="openFilterDialog()"><img src="assets/filter-list-icon.svg" alt="">&nbsp; Filter Posts</button>
 </div>
 <div class="post-background-container">
@@ -20,7 +9,7 @@
                 <div class="post-user">{{post.user}}</div>
                 <div class="post-date">{{post.date}}</div>
             </div>
-            <div class="post-buttons" *ngIf="post.user == username">
+            <div class="post-buttons" *ngIf="post.user == user.username">
                 <button id="post-edit" mat-button (click)="openPostEditingDialog(post)"><img src="assets/edit-icon.svg" alt=""></button>
                 <button id="post-delete" mat-button (click)="openPostDeletionDialog(post._id)"><img src="assets/delete-icon.svg" alt=""></button>
             </div>

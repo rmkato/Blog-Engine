@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '../../services/user.service';
 import { MatDialog } from '@angular/material/dialog';
 import * as $ from 'jquery';
 import { AccountCreationDialogComponent } from 'src/app/dialogs/account-creation-dialog/account-creation-dialog.component';
@@ -14,26 +15,11 @@ import { FilterDialogComponent } from 'src/app/dialogs/filter-dialog/filter-dial
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  loggedIn: boolean;
-
-  firstName: string;
-  lastName: string;
-  username: string;
-  email: string;
-  password: string;
-
   posts: any[];
 
-  constructor(private dialog: MatDialog) { }
+  constructor(private dialog: MatDialog, public user: UserService) {}
 
   ngOnInit() {
-    this.loggedIn = false;
-    this.firstName = '';
-    this.lastName = '';
-    this.username = '';
-    this.email = '';
-    this.password = '';
-
     this.checkLoginCookie();
     this.getPosts();
   }
@@ -42,8 +28,9 @@ export class HomeComponent implements OnInit {
     if (document.cookie) {
       $.post('http://localhost:4000/user/verifyCookie', {'cookie': document.cookie})
         .done((res) => {
-          this.username = res.username;
-          this.loggedIn = true;
+          //this.username = res.username;
+          this.user.username = res.username;
+          this.user.loggedIn = true;
           this.deleteLoginCookie();
           document.cookie = res.cookie;
         })
@@ -70,45 +57,10 @@ export class HomeComponent implements OnInit {
   }
 
   logOut() {
-    this.clearInputFields();
     this.deleteLoginCookie();
-    this.loggedIn = false;
+    this.user.loggedIn = false;
+    this.user.username = '';
     alert("Logged out")
-  }
-
-  clearInputFields() {
-    this.firstName = '';
-    this.lastName = '';
-    this.email = '';
-    this.password = '';
-  }
-
-  openAccountCreationDialog() {
-    const dialogRef = this.dialog.open(AccountCreationDialogComponent, {
-      autoFocus: true,
-      disableClose: true
-    });
-    dialogRef.afterClosed().subscribe(res => {
-      if (res.accountCreationSuccess == true) {
-        this.username = res.username;
-        this.loggedIn = true;
-        this.clearInputFields();
-      }
-    })
-  }
-
-  openLoginDialog() {
-    const dialogRef = this.dialog.open(LoginDialogComponent, {
-      autoFocus: true,
-      disableClose: true
-    });
-    dialogRef.afterClosed().subscribe((res) => {
-      if (res.loginSuccess == true) {
-        this.username = res.username;
-        this.loggedIn = true;
-        this.clearInputFields();
-      }
-    });
   }
 
   openPostCreationDialog() {
@@ -118,7 +70,7 @@ export class HomeComponent implements OnInit {
       autoFocus: true,
       disableClose: true,
       data: {
-        'username': this.username
+        'username': this.user.username
       }
     });
     dialogRef.afterClosed().subscribe(() => {
@@ -164,6 +116,9 @@ export class HomeComponent implements OnInit {
       width: '304.8',
       autoFocus: true,
       disableClose: true
+    })
+    dialogRef.afterClosed().subscribe(() => {
+      // Filter posts based on selected parameter
     })
   }
 

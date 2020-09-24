@@ -42,8 +42,6 @@ button {
     margin-bottom: auto;
 }
 
-
-
 .post-controlbar {
     background-color: rgb(141, 196, 141);
     position: -webkit-sticky;
@@ -185,10 +183,4 @@ button {
     padding-right: 3%;
     padding-top: 10px;
     padding-bottom: 10px;
-}
-
-@media screen and (max-width: 690px) {
-    #h1-title {
-        display: none;
-    }
 }
