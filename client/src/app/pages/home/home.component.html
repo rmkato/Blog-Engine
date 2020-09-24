@@ -25,6 +25,11 @@
                 <button id="post-delete" mat-button (click)="openPostDeletionDialog(post._id)"><img src="assets/delete-icon.svg" alt=""></button>
             </div>
             <h3 class="post-title">{{post.title}}</h3>
+            <div class="post-tags">
+                <span class="post-tag" *ngFor="let tag of post.tags">
+                    <button mat-stroked-button>{{tag}}</button>
+                </span>
+            </div>
             <div class="post-content">{{post.content}}</div>
             <hr class="post-hr">
         </div>

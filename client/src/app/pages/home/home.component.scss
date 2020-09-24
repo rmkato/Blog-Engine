@@ -100,8 +100,22 @@ button {
 }
 
 .post-title {
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     margin-left: 20px;
+}
+
+.post-tags {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.post-tags .mat-stroked-button {
+    border: 1px solid gray;
+    background-color: rgb(141, 196, 141, 0.5);
+}
+
+.post-tag {
+    margin-left: 10px;
 }
 
 .post-content {
