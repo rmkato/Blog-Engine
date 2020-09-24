@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { MatDialog } from '@angular/material/dialog';
 import * as $ from 'jquery';
-import { AccountCreationDialogComponent } from 'src/app/dialogs/account-creation-dialog/account-creation-dialog.component';
-import { LoginDialogComponent } from 'src/app/dialogs/login-dialog/login-dialog.component';
 import { PostCreationDialogComponent } from 'src/app/dialogs/post-creation-dialog/post-creation-dialog.component';
 import { PostEditingDialogComponent } from 'src/app/dialogs/post-editing-dialog/post-editing-dialog.component';
 import { FilterDialogComponent } from 'src/app/dialogs/filter-dialog/filter-dialog.component';
