@@ -10,6 +10,8 @@ import * as $ from 'jquery';
 export class PostCreationDialogComponent implements OnInit {
   postTitle: string;
   postBody: string;
+  tag: string;
+  postTags: Array<string>;
 
   constructor(
     public dialogRef: MatDialogRef<PostCreationDialogComponent>,
@@ -17,16 +19,30 @@ export class PostCreationDialogComponent implements OnInit {
   ) { 
     this.postTitle = '';
     this.postBody = '';
+    this.tag = '';
+    this.postTags = [];
   }
 
   ngOnInit() {
   }
+
+  addTag() {
+    if (this.tag != '' && !this.postTags.includes(this.tag)) {
+      this.postTags.push(this.tag);      
+    }
+    this.tag = '';
+  }
+
+  removeTag(tag) {
+    this.postTags = this.postTags.filter(function(t) {return t !== tag });
+  }
   
   createPost() {
-    console.log(this.postTitle, this.postBody, this.data.user, this.data.email)
+    console.log(this.postTitle, this.postBody, this.data.username, this.postTags);
     $.post('http://localhost:4000/post/create', {
       title: this.postTitle,
       content: this.postBody,
+      tags: this.postTags,
       date: new Date().toLocaleString(),
       user: this.data.username,
     })

@@ -135,9 +135,11 @@ app.post('/post/retrieve', (req, res) => {
 
 app.post('/post/create', (req, res) => {
 	console.log("Received post creation request\n");
+	console.log(req.body.tags);
 	var post = new Post({
 		title: req.body.title,
 		content: req.body.content,
+		tags: req.body.tags,
 		date: req.body.date,
 		user: req.body.user
 	}).save((err, response) => {
@@ -156,7 +158,9 @@ app.post('/post/delete', (req, res) => {
 });
 
 app.post('/post/update', (req, res) => {
-	console.log("Received post update request");
+	if (req.body.tags == undefined)
+		req.body.tags = [];
+	console.log("Received post update request", req.body.tags);
 	Post.findOneAndUpdate(
 		{ 
 			_id: new mongoose.Types.ObjectId(req.body.id) 
@@ -164,6 +168,7 @@ app.post('/post/update', (req, res) => {
 		{ 
 			title: req.body.title,
 			content: req.body.content,
+			tags: req.body.tags,
 			date: req.body.date
 		}, 
 		(err, response) => {

@@ -3,7 +3,8 @@ const mongoose = require("mongoose")
 var postSchema = mongoose.Schema({
     title: {
         type: String,
-        required: true
+        required: true,
+        trim: true
     },
     content: {
         type: String,
@@ -16,6 +17,11 @@ var postSchema = mongoose.Schema({
     user: {
         type: String,
         required: true
+    }, 
+    tags: {
+        type: Array,
+        required: false,
+        trim: true
     }
 })
 
