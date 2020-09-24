@@ -14,6 +14,7 @@ import { LoginDialogComponent } from './dialogs/login-dialog/login-dialog.compon
 import { PostCreationDialogComponent } from './dialogs/post-creation-dialog/post-creation-dialog.component';
 import { FilterDialogComponent } from './dialogs/filter-dialog/filter-dialog.component';
 import { PostEditingDialogComponent } from './dialogs/post-editing-dialog/post-editing-dialog.component';
+import { PostComponent } from './pages/post/post.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { PostEditingDialogComponent } from './dialogs/post-editing-dialog/post-e
     LoginDialogComponent,
     PostCreationDialogComponent,
     FilterDialogComponent,
-    PostEditingDialogComponent
+    PostEditingDialogComponent,
+    PostComponent
   ],
   imports: [
     BrowserModule,

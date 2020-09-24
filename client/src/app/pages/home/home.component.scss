@@ -1,3 +1,7 @@
+button {
+    margin-left: 10px;
+}
+
 .navbar {
     background-color: rgb(6, 79, 50);
     color: white;
@@ -38,9 +42,7 @@
     margin-bottom: auto;
 }
 
-button {
-    margin-left: 10px;
-}
+
 
 .post-controlbar {
     background-color: rgb(141, 196, 141);
@@ -104,23 +106,31 @@ button {
     margin-left: 20px;
 }
 
+.post-link {
+    text-decoration: none;
+    color: black;
+}
+
 .post-tags {
     padding-top: 10px;
-    padding-bottom: 10px;
+    padding-bottom: 20px;
+    margin-left: 15px;
 }
 
 .post-tags .mat-stroked-button {
     border: 1px solid gray;
     background-color: rgb(141, 196, 141, 0.5);
+    line-height: 28px;
+    padding: 0 5px;
 }
 
-.post-tag {
-    margin-left: 10px;
+.post-tag button {
+    margin-left: 5px;
 }
 
 .post-content {
     text-align: left;
-    margin-left: 20px;
+    margin-left: 30px;
     width: 100%;
     white-space: pre-line;
 }
@@ -141,11 +151,12 @@ button {
 }
 
 .post .mat-button:hover {
-    background-color: rgb(141, 196, 141, 0.6)
+    background-color:rgb(6, 79, 50);
 }
 
-#post-edit {
-    margin-bottom: 10px;
+.post .mat-button:hover * {
+    -webkit-filter: invert(1);
+   filter: invert(1);
 }
 
 .col1 {
