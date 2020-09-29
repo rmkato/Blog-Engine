@@ -41,7 +41,6 @@ export class AccountCreationDialogComponent implements OnInit {
       });
       document.cookie = res.cookie;
       alert("Account created");
-      console.log(document.cookie);
     })
     .fail((res) => {
       alert("Account creation failed: " + res.responseJSON.message);

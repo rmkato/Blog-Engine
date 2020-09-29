@@ -42,4 +42,15 @@ export class NavbarComponent implements OnInit {
     })
   }
 
+  logOut() {
+    this.deleteLoginCookie();
+    this.user.loggedIn = false;
+    this.user.username = '';
+    alert("Logged out")
+  }
+
+  deleteLoginCookie() {
+    document.cookie = 'login=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+  }
+
 }

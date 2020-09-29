@@ -41,10 +41,8 @@ export class LoginDialogComponent implements OnInit {
         'username': this.username,
         'loginSuccess': true
       });
-      console.log(res.cookie);
       document.cookie = res.cookie;
       alert("Logged In")
-      console.log(document.cookie);
     })
     .fail((res) => {
       alert("Login Failed: " + res.responseJSON.message);

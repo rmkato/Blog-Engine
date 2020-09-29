@@ -62,5 +62,19 @@ userSchema.methods.comparePassword = function(candidatePassword, checkpassword) 
     })
 }
 
+userSchema.methods.hashPassword = function(pw) {
+    if (pw.isModified('password')) {
+		bcrypt.genSalt(10, (err, salt) => {
+			if (err) return err; 
+			bcrypt.hash(pw, salt, function(error, hash) {
+				if (error) return error;
+				return hash;
+			})
+		})
+	} else {
+		return pw;
+	}
+}
+
 // Export the schema 
 module.exports = mongoose.model('UserSchema', userSchema);
